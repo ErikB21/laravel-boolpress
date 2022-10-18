@@ -6,6 +6,8 @@ import ContactPage from './pages/ContactPage.vue';
 import BlogPages from './pages/BlogPages.vue';
 import HomePages from './pages/HomePages.vue';
 import AboutPages from './pages/AboutPages.vue';
+import NotFoundPages from './pages/NotFoundPages.vue';
+import DetailsPostPages from './pages/DetailsPostPages';
 
 
 
@@ -31,6 +33,16 @@ const router = new VueRouter({
             path: '/blog',
             name: 'blog',
             component: BlogPages
+        },
+        {
+            path: '/error',
+            name: 'error',
+            component: NotFoundPages
+        },
+        {
+            path: '/blog/:slug',
+            name: 'details-post',
+            component: DetailsPostPages
         },
     ]
 });
