@@ -1,0 +1,18 @@
+.my_bg_2 {
+  background-image: url("https://static.vecteezy.com/ti/vettori-gratis/p1/2309794-sfondo-bianco-geometrico-gratuito-vettoriale.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.my_bg_2 .card {
+  width: 320px;
+}
+
+.my_bg_2 .post_image {
+  width: 290px;
+}
+
+.my_bg_2 .post_image img {
+  width: 100% !important;
+}
+

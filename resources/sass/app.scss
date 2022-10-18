@@ -1,0 +1,38 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@300&display=swap');
+
+// Variables
+@import 'variables';
+
+//import scss views
+@import 'index';
+@import 'create';
+@import 'show';
+@import 'edit';
+@import 'home';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+body{
+    font-family: $font-family-inconsolata;
+    nav{
+        height: 10vh;
+        .img_logo{
+            width: 40px;
+            height: 40px;
+            img{
+                width: 100%;
+            }
+        }
+    }
+    
+    main{
+        height: 80vh;
+        overflow-y: auto;
+    }
+    
+    footer{
+        height: 10vh;
+    }
+}
