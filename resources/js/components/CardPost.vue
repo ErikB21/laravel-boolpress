@@ -19,7 +19,7 @@
                     <li v-for="(tag, index) in post.tags" :key="index">{{tag.name}}</li>
                 </ul>
             </p>
-            <router-link class="btn btn-primary" :to="{name: 'details-post', params:{slug: post.id}}">Details</router-link>
+            <router-link class="btn btn-primary" :to="{name: 'details-post', params:{slug: post.slug}}">Details</router-link>
         </div>
     </div>
 </template>

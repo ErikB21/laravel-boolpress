@@ -39,19 +39,23 @@ class PostController extends Controller
      */
     public function show($slug)
     {
-        // $post = Post::where('slug', $slug)->first();
+        $post = Post::where('slug', $slug)->with(['category', 'tags'])->firstOrFail();//recupero il post con lo slug uguale a quello richiesto nella url
 
-        // if($post){
-        //     return response()->json([
-        //         'success' => true,
-        //         'results' => $post
-        //     ]);
-        // }else{
-        //     return response()->json([
-        //         'success' => false,
-        //         'message' => 'Il post non è stato trovato'
-        //     ]);
-        // } //// ancora da capire bene
+        if($post->cover){
+            $post->cover = asset('storage/' . $post->cover);
+        }else{
+            $post->cover = asset('images/tree.png');
+        }
+
+        return response()->json([//mi riporti quel post
+            'success' => true,
+            'result' => $post
+        ]);
     }
+
+    //possiamo creare l'istanza con firstOrFail(), che cattura l'errore da se
+    //quindi il nostro if ed else non servirebbero. Nel componente del dettaglio 
+    //del post, oltre alla then, passare anche la catch, che ci ritornerà l'errore in console.
+    
 
 }

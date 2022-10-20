@@ -46,7 +46,7 @@ import CardPost from '../components/CardPost.vue';
                 this.currentPage = response.data.results.current_page;
                 this.lastPage = response.data.results.last_page;
             }).catch((err) => {
-                console.log(err);
+                this.$router.push({name: 'error'});
             });
         },
     },
