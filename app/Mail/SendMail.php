@@ -29,6 +29,6 @@ class SendMail extends Mailable
      */
     public function build()
     {
-        return $this->replyTo($this->lead->email)->view('');
+        return $this->replyTo($this->lead->email)->view('emails.newContact');
     }
 }
