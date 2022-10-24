@@ -31,7 +31,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse ($category->posts as $posts)
+                    @forelse ($category->posts()->withTrashed()->get() as $posts)
                         <tr>
                             <th scope="row">{{$posts->id}}</th>
                             <td>{{$posts->title}}</td>

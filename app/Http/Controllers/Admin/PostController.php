@@ -19,7 +19,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();//istanzio posts riempendolo con i dati prelevati dal Model Post
+        $posts = Post::withTrashed()->get();//istanzio posts riempendolo con i dati prelevati dal Model Post
         return view('admin.posts.index', compact('posts'));
     }
 
@@ -152,14 +152,14 @@ class PostController extends Controller
     protected function calcSlug($title){
         $slug = Str::slug($title, '-');//metodo che converto in una stringa
 
-        $checkPost = Post::where('slug', $slug)->first();//guarda se quel slug è gia presente
+        $checkPost = Post::withTrashed()->where('slug', $slug)->first();//guarda se quel slug è gia presente
 
         $counter = 1;
 
         while($checkPost){
             $slug = Str::slug($title, '-' . $counter . '-');
             $counter++;
-            $checkPost = Post::where('slug', $slug)->first();
+            $checkPost = Post::withTrashed()->where('slug', $slug)->first();
         }
         return $slug;
     }
@@ -172,11 +172,28 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        if($post->cover){
-            Storage::delete($post->cover);
-        }
-        $post->tags()->sync([]);
         $post->delete();
         return redirect()->route('admin.posts.index')->with('danger', 'Hai eliminato il post correttamente');
+    }
+
+    public function delete($id){//eliminare definitamente
+        $post = Post::withTrashed()->where('id', $id)->first();
+
+        if($post->cover){
+            Storage::delte($post->cover);
+        }
+
+        $post->tags->sync([]);
+        $post->forceDelete();
+        return redirect()->route('admin.posts.index')->with('status', 'Eliminazione completa avvenuta con successo!');
+    }
+
+    public function restore ($id) {//ripristinare
+
+        $post = Post::withTrashed()->where('id', $id)->first();
+        $post->restore();
+
+        return redirect()->route('admin.posts.index')->with('success', 'Post ripristinato con successo');
+
     }
 }

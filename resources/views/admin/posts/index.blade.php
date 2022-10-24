@@ -37,6 +37,7 @@
                     <th scope="col">Category</th>
                     <th scope="col">Tag</th>
                     <th scope="col">Details</th>
+                    <th scope="col">Restore</th>
                 </tr>
             </thead>
             <tbody>
@@ -60,9 +61,15 @@
                                 {{$tag->name}}
                             @endforeach
                         </td>
-                        <td>
-                            <a class="btn btn-primary" href="{{route('admin.posts.show', ['post' => $post])}}">Details</a>
-                        </td>
+                        @if ($post->deleted_at)
+                            <td>
+                                <a class="btn btn-secondary" href="{{route('admin.posts.restore', ['post' => $post->id])}}">Restore</a>
+                            </td>
+                        @else
+                            <td>
+                                <a class="btn btn-primary" href="{{route('admin.posts.show', ['post' => $post])}}">Details</a>
+                            </td>
+                        @endif
                     </tr>
                 @empty
                     <tr>

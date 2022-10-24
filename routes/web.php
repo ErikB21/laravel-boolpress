@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\PostController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -26,6 +27,8 @@ Route::middleware('auth')
         Route::resource('posts', 'PostController');
         Route::resource('categories', 'CategoryController');
         Route::resource('tags', 'TagController');
+        Route::get('posts/restore/{post}', 'PostController@restore')->name('posts.restore');
+        Route::delete('posts/delete/{post}', 'PostController@delete');
 });
 
 Route::get('{any?}', function(){
