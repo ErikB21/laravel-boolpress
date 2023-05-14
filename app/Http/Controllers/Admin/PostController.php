@@ -180,7 +180,7 @@ class PostController extends Controller
         $post = Post::withTrashed()->where('id', $id)->first();
 
         if($post->cover){
-            Storage::delte($post->cover);
+            Storage::delete($post->cover);
         }
 
         $post->tags->sync([]);
